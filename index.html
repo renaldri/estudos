@@ -6,83 +6,88 @@
 <style>
 :root{--bg:#f2f5f7;--fg:#14202b;--mut:#5d6b78;--card:#fff;--bd:#d3dbe2;--ac:#0b5c63;--acf:#fff;--ok:#1b7a43;--okb:#e3f4ea;--no:#b3261e;--nob:#fbe8e6}
 @media(prefers-color-scheme:dark){:root{--bg:#0f161c;--fg:#e8eef3;--mut:#93a3b1;--card:#18222b;--bd:#2c3a46;--ac:#58c4cc;--acf:#06262a;--ok:#6fcf97;--okb:#12291b;--no:#f28b82;--nob:#331a18}}
-*{box-sizing:border-box}
+*{box-sizing:border-box}[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:700px;margin:0 auto;padding:12px 14px 40px}
-.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}
-.stat{color:var(--mut);font-size:14px}
+.top{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px}.stat{color:var(--mut);font-size:14px}
 select,button,input{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:8px 10px}
 button{cursor:pointer}button.p{background:var(--ac);color:var(--acf);border-color:var(--ac)}
-button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
-.f{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
 .q{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:16px}
-.meta{color:var(--mut);font-size:14px;margin:0 0 8px}
 .en{font:19px/1.55 Georgia,"Times New Roman",serif;margin:0 0 14px}
-.alt{display:block;width:100%;text-align:left;margin:0 0 10px;padding:10px 12px;background:var(--bg)}
-.alt b{display:inline-block;width:1.6em}
+.alt{display:block;width:100%;text-align:left;margin:0 0 10px;padding:10px 12px;background:var(--bg)}.alt b{display:inline-block;width:1.6em}
 .alt.ok{border-color:var(--ok);background:var(--okb)}.alt.no{border-color:var(--no);background:var(--nob)}
 .ex{margin:-4px 0 12px;padding:0 4px 0 14px;font-size:15px;color:var(--mut);border-left:3px solid var(--bd)}
 .ex.ok{border-color:var(--ok);color:var(--fg)}.ex.no{border-color:var(--no);color:var(--fg)}
 .res{font-weight:600;margin:4px 0 12px}.res.ok{color:var(--ok)}.res.no{color:var(--no)}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.row .sp{flex:1}
-dialog{max-width:520px;width:calc(100% - 28px);border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--fg);padding:18px}
-dialog::backdrop{background:#0008}
-dialog h2{font-size:15px;color:var(--mut);margin:0 0 8px;font-weight:600}
-dialog h3{font:600 20px/1.3 Georgia,serif;margin:0 0 8px}
-dialog p{margin:0 0 14px}
-input{width:100%}#st{font-size:13px;color:var(--mut)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.sp{flex:1}
+.mr{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)}.mr span{flex:1}.mr small{color:var(--mut)}
+input[type=checkbox]{width:20px;height:20px;padding:0}.mi{width:64px}
+h3{margin:0 0 8px}.chk{display:flex;gap:10px;align-items:center;margin:12px 0}
+dialog{max-width:540px;width:calc(100% - 28px);border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--fg);padding:18px}
+dialog::backdrop{background:#0008}dialog h2{font-size:14px;color:var(--mut);margin:0 0 8px;font-weight:600}
+dialog h3{font:600 20px/1.3 Georgia,serif}#dp p{margin:0 0 10px}#st{font-size:13px;color:var(--mut)}
+dialog input[type=text]{width:100%}
+#dp table{border-collapse:collapse;margin:0 0 10px}#dp td,#dp th{border:1px solid var(--bd);padding:4px 10px;text-align:center}
+.v svg{width:100%;max-width:360px;height:auto;display:block;margin:0 0 8px}.v text{fill:var(--fg);font:13px system-ui,sans-serif}
+.v .l{stroke:var(--fg);fill:none;stroke-width:2}.v .b{fill:var(--ac);fill-opacity:.22;stroke:var(--ac);stroke-width:2}
 </style></head><body><main>
-<div class="top"><strong>Escrevente TJSP</strong><span class="stat" id="stat"></span></div>
-<div class="f">
- <select id="fm" aria-label="Matéria"></select>
- <select id="fo" aria-label="Modo"><option value="all">Todas</option><option value="new">Não respondidas</option><option value="err">Que errei</option></select>
- <button id="cfg">Sincronização</button>
-</div>
-<div class="q" id="box"></div>
+<section id="home">
+ <div class="top"><strong>Escrevente TJSP</strong><span class="stat" id="stat"></span></div>
+ <div class="q"><h3>Montar sessão</h3><div id="ml"></div>
+  <label class="chk"><input type="checkbox" id="pr" checked> Priorizar as que errei e as novas</label>
+  <div class="row"><button class="p" id="go">Iniciar</button><button id="rs" hidden>Continuar sessão</button><span class="sp"></span><button id="cfg">Sincronização</button></div></div>
+</section>
+<section id="quiz" hidden><div class="top"><span class="stat" id="sc"></span><button id="ex">Sair</button></div><div class="q" id="box"></div></section>
+<section id="end" hidden><div class="q" id="rep"></div></section>
 </main>
-<dialog id="dm"><h2 id="dt"></h2><h3 id="dh"></h3><p id="dp"></p>
+<dialog id="dm"><h2 id="dt"></h2><h3 id="dh"></h3><div id="dp"></div>
  <div class="row"><button id="dpv">Anterior</button><button id="dnx">Próximo</button><span class="sp"></span><button class="p" id="dx">Fechar</button></div></dialog>
-<dialog id="dc"><h3>Sincronizar progresso</h3>
- <p>Cole o endereço do aplicativo da Web (Apps Script) para continuar de onde parou em outro aparelho.</p>
- <input id="url" placeholder="https://script.google.com/macros/s/.../exec">
- <p id="st"></p>
+<dialog id="dc"><h3>Sincronizar progresso</h3><p>Cole o endereço do aplicativo da Web (Apps Script) para continuar de onde parou em outro aparelho.</p>
+ <input type="text" id="url" placeholder="https://script.google.com/macros/s/.../exec"><p id="st"></p>
  <div class="row"><button id="sv" class="p">Salvar e sincronizar</button><span class="sp"></span><button id="cx">Fechar</button></div></dialog>
-<script src="questoes.js"></script>
+<script src="questoes.js"></script><script src="questoes2.js"></script>
 <script>
-const K='escrevente.v1',$=s=>document.querySelector(s),Q=window.QUESTOES,T=window.TOPICOS;
-let S=JSON.parse(localStorage.getItem(K)||'{"q":{},"last":null,"t":0}'),cfg=JSON.parse(localStorage.getItem(K+'.cfg')||'{}'),pool=[],i=0,ci=0,tm;
+const K='escrevente.v1',$=s=>document.querySelector(s),Q=window.QUESTOES,T=window.TOPICOS,SB=window.SABER||{},L='ABCDE',B=Object.fromEntries(Q.map(q=>[q.id,q]));
+let S=JSON.parse(localStorage.getItem(K)||'{}'),cfg=JSON.parse(localStorage.getItem(K+'.cfg')||'{}'),ci=0,cards=[],tm;S.q=S.q||{};S.t=S.t||0;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const status=m=>$('#st').textContent=m;
+const status=m=>$('#st').textContent=m,show=id=>['home','quiz','end'].forEach(s=>$('#'+s).hidden=s!==id);
 function save(){S.t=Date.now();localStorage.setItem(K,JSON.stringify(S));push()}
-function push(){if(!cfg.url)return;clearTimeout(tm);tm=setTimeout(()=>fetch(cfg.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(S)}).then(()=>status('Sincronizado.')).catch(()=>status('Falha ao enviar. Verifique o endereço.')),1200)}
-function merge(r){for(const id in(r.q||{}))if(!S.q[id]||r.q[id].t>S.q[id].t)S.q[id]=r.q[id];if((r.t||0)>S.t&&r.last)S.last=r.last;S.t=Math.max(S.t,r.t||0)}
-async function pull(){if(!cfg.url)return;try{merge(await(await fetch(cfg.url)).json());localStorage.setItem(K,JSON.stringify(S));status('Sincronizado.');build(true)}catch(e){status('Falha ao baixar. Verifique o endereço.')}}
-const ans=q=>S.q[q.id]&&S.q[q.id].a!=null?S.q[q.id]:null;
-function build(keep){
- const m=$('#fm').value,o=$('#fo').value;
- pool=Q.filter(q=>(m==='all'||q.m===m)&&(o==='all'||(o==='new'?!ans(q):ans(q)&&!ans(q).ok)));
- i=keep?Math.max(0,pool.findIndex(q=>q.id===S.last)):0;render()}
-function stats(){const a=Q.filter(ans),c=a.filter(q=>ans(q).ok).length;$('#stat').textContent=a.length+' de '+Q.length+' respondidas'+(a.length?' · '+Math.round(100*c/a.length)+'% de acerto':'')}
-function render(){
- stats();const q=pool[i],box=$('#box');
- if(!q){box.innerHTML='<p>Nenhuma questão neste filtro.</p>';return}
- S.last=q.id;const r=ans(q),L='ABCDE';
- box.innerHTML='<p class="meta">'+esc(q.m)+' · '+esc(q.ref)+' · questão '+(i+1)+' de '+pool.length+'</p><p class="en">'+esc(q.q)+'</p>'+
- q.a.map((t,k)=>{const cl=r?(k===q.g?'ok':(k===r.a?'no':'')):'';
-  return '<button class="alt '+cl+'" data-k="'+k+'"'+(r?' disabled':'')+'><b>'+L[k]+')</b>'+esc(t)+'</button>'+(r?'<p class="ex '+cl+'">'+esc(q.e[k])+'</p>':'')}).join('')+
- (r?'<p class="res '+(r.ok?'ok':'no')+'">'+(r.ok?'Correto.':'Errado. Gabarito: '+L[q.g]+'.')+'</p>':'')+
- '<div class="row"><button id="pv"'+(i?'':' disabled')+'>Anterior</button><button id="sm" class="p">Saiba mais</button>'+(r?'<button id="rf">Refazer</button>':'')+'<span class="sp"></span><button id="nx"'+(i<pool.length-1?'':' disabled')+'>Próxima</button></div>';
- box.querySelectorAll('.alt').forEach(b=>b.onclick=()=>{const o=S.q[q.id]||{};S.q[q.id]={a:+b.dataset.k,ok:+b.dataset.k===q.g,t:Date.now(),n:(o.n||0)+1};save();render()});
- $('#pv').onclick=()=>{i--;save();render()};$('#nx').onclick=()=>{i++;save();render()};
- $('#sm').onclick=()=>{ci=0;card()};
- if(r)$('#rf').onclick=()=>{S.q[q.id]={a:null,t:Date.now(),n:S.q[q.id].n};save();render()};
- localStorage.setItem(K,JSON.stringify(S))}
-function card(){const tp=T[pool[i].t],c=tp.cards[ci];$('#dt').textContent=tp.nome+' · card '+(ci+1)+' de '+tp.cards.length;$('#dh').textContent=c[0];$('#dp').textContent=c[1];$('#dpv').disabled=!ci;$('#dnx').disabled=ci>=tp.cards.length-1;if(!$('#dm').open)$('#dm').showModal()}
-$('#dpv').onclick=()=>{ci--;card()};$('#dnx').onclick=()=>{ci++;card()};$('#dx').onclick=()=>$('#dm').close();
+function push(){if(!cfg.url)return;clearTimeout(tm);tm=setTimeout(()=>fetch(cfg.url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(S)}).then(()=>status('Sincronizado.')).catch(()=>status('Falha ao enviar.')),1200)}
+async function pull(){if(!cfg.url)return;try{const r=await(await fetch(cfg.url)).json();for(const id in(r.q||{}))if(!S.q[id]||r.q[id].t>S.q[id].t)S.q[id]=r.q[id];if((r.t||0)>S.t){S.sess=r.sess;S.t=r.t}localStorage.setItem(K,JSON.stringify(S));status('Sincronizado.');home()}catch(e){status('Falha ao baixar. Verifique o endereço.')}}
+function home(){show('home');const ms=[...new Set(Q.map(q=>q.m))];
+ $('#ml').innerHTML=ms.map(m=>{const n=Q.filter(q=>q.m===m).length;return '<label class="mr"><input type="checkbox" data-m="'+esc(m)+'" checked><span>'+esc(m)+' <small>'+n+' questões</small></span><input type="number" class="mi" min="1" max="'+n+'" value="'+Math.min(10,n)+'" aria-label="Quantidade"></label>'}).join('');
+ const a=Q.filter(q=>S.q[q.id]&&S.q[q.id].a!=null);$('#stat').textContent=a.length+' de '+Q.length+' respondidas';
+ $('#rs').hidden=!(S.sess&&S.sess.i<S.sess.ids.length)}
+function start(){const prio=$('#pr').checked,ids=[];
+ document.querySelectorAll('#ml .mr').forEach(r=>{const c=r.querySelector('[data-m]');if(!c.checked)return;
+  const rk=q=>{const x=S.q[q.id];return(prio?(x&&x.a!=null?(x.ok?2:0):1):0)+Math.random()*.9};
+  ids.push(...Q.filter(q=>q.m===c.dataset.m).sort((a,b)=>rk(a)-rk(b)).slice(0,Math.max(1,+r.querySelector('.mi').value||1)).map(q=>q.id))});
+ if(!ids.length)return;S.sess={ids,i:0,r:{}};save();play()}
+function play(){const s=S.sess;if(s.i>=s.ids.length)return finish();show('quiz');const q=B[s.ids[s.i]],r=s.r[q.id];
+ $('#sc').textContent=(s.i+1)+' de '+s.ids.length+' · '+q.m;
+ $('#box').innerHTML='<p class="en">'+esc(q.q)+'</p>'+q.a.map((t,k)=>{const c=r?(k===q.g?'ok':k===r.a?'no':''):'';
+  return '<button class="alt '+c+'" data-k="'+k+'"'+(r?' disabled':'')+'><b>'+L[k]+')</b>'+esc(t)+'</button>'+(r?'<p class="ex '+c+'">'+esc(q.e[k])+'</p>':'')}).join('')+
+  (r?'<p class="res '+(r.ok?'ok':'no')+'">'+(r.ok?'Correto.':'Errado. Gabarito: '+L[q.g]+'.')+' <span class="stat">Fundamento: '+esc(q.ref)+'</span></p><div class="row"><button id="sm" class="p">Saiba mais</button><span class="sp"></span><button id="nx" class="p">'+(s.i<s.ids.length-1?'Próxima':'Finalizar')+'</button></div>':'');
+ document.querySelectorAll('.alt').forEach(b=>b.onclick=()=>{const k=+b.dataset.k,o=S.q[q.id]||{};s.r[q.id]={a:k,ok:k===q.g};S.q[q.id]={a:k,ok:k===q.g,t:Date.now(),n:(o.n||0)+1};save();play()});
+ if(r){$('#nx').onclick=()=>{s.i++;save();play()};$('#sm').onclick=()=>{ci=0;cards=[...(SB[q.id]||[]).map(c=>[0,c]),...T[q.t].cards.map(c=>[1,c])];card(q)}}}
+function card(q){const[c,x]=cards[ci],ns=cards.filter(a=>!a[0]).length;$('#dt').textContent=(c?'Revisão do tópico: '+T[q.t].nome:'Sobre esta questão')+' · '+(ci+1)+' de '+cards.length;$('#dh').textContent=x[0];$('#dp').innerHTML=x[1];$('#dpv').disabled=!ci;$('#dnx').disabled=ci>=cards.length-1;if(!$('#dm').open)$('#dm').showModal()}
+function report(){const s=S.sess,qs=s.ids.map(i=>B[i]),ok=q=>s.r[q.id]&&s.r[q.id].ok,hit=qs.filter(ok).length,pc=(a,b)=>b?Math.round(100*a/b)+'%':'-';
+ const grp=k=>{const g={};qs.forEach(q=>{const x=g[k(q)]||(g[k(q)]={n:0,e:0});x.n++;if(!ok(q))x.e++});return Object.entries(g).sort((a,b)=>b[1].e/b[1].n-a[1].e/a[1].n)};
+ let t='RESULTADO DA SESSÃO - '+new Date().toLocaleString('pt-BR')+'\n\nAcertos: '+hit+' de '+qs.length+' ('+pc(hit,qs.length)+')\n\nDESEMPENHO POR MATÉRIA\n';
+ grp(q=>q.m).forEach(([k,v])=>t+='- '+k+': '+(v.n-v.e)+'/'+v.n+' ('+pc(v.n-v.e,v.n)+')\n');
+ t+='\nMAIORES DIFICULDADES (tópicos com mais erros)\n';let n=0;grp(q=>T[q.t].nome).forEach(([k,v])=>{if(v.e)t+=(++n)+'. '+k+': '+v.e+' erro(s) em '+v.n+'\n'});if(!n)t+='Nenhuma nesta sessão.\n';
+ t+='\nQUESTÕES ERRADAS\n';qs.filter(q=>!ok(q)).forEach(q=>{const a=s.r[q.id];t+='\n['+q.ref+'] '+q.q+'\n   Sua resposta: '+(a?L[a.a]+') '+q.a[a.a]:'(não respondida)')+'\n   Gabarito: '+L[q.g]+') '+q.a[q.g]+'\n'});
+ const h={};Q.forEach(q=>{const x=S.q[q.id];if(x&&x.a!=null){const y=h[T[q.t].nome]||(h[T[q.t].nome]={n:0,k:0});y.n++;if(x.ok)y.k++}});
+ t+='\nHISTÓRICO ACUMULADO (menor acerto primeiro)\n';Object.entries(h).sort((a,b)=>a[1].k/a[1].n-b[1].k/b[1].n).forEach(([k,v])=>t+='- '+k+': '+pc(v.k,v.n)+' ('+v.n+' questão(ões))\n');return t}
+function finish(){show('end');const s=S.sess,hit=s.ids.filter(i=>s.r[i]&&s.r[i].ok).length;
+ $('#rep').innerHTML='<h3>Sessão concluída</h3><p>Você acertou <b>'+hit+' de '+s.ids.length+'</b>.</p><div class="row"><button class="p" id="dl">Baixar resultado (.txt)</button><span class="sp"></span><button id="mn">Voltar ao menu</button></div>';
+ $('#dl').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([report()],{type:'text/plain;charset=utf-8'}));a.download='resultado-'+new Date().toISOString().slice(0,10)+'.txt';a.click()};
+ $('#mn').onclick=()=>{S.sess=null;save();home()}}
+$('#go').onclick=start;$('#rs').onclick=play;$('#ex').onclick=()=>{S.sess&&S.sess.i>=S.sess.ids.length?finish():home()};
+$('#dpv').onclick=()=>{ci--;card(B[S.sess.ids[S.sess.i]])};$('#dnx').onclick=()=>{ci++;card(B[S.sess.ids[S.sess.i]])};$('#dx').onclick=()=>$('#dm').close();
 $('#cfg').onclick=()=>{$('#url').value=cfg.url||'';$('#dc').showModal()};$('#cx').onclick=()=>$('#dc').close();
-$('#sv').onclick=()=>{cfg.url=$('#url').value.trim();localStorage.setItem(K+'.cfg',JSON.stringify(cfg));status('Sincronizando...');pull().then(()=>push())};
-$('#fm').innerHTML='<option value="all">Todas as matérias</option>'+[...new Set(Q.map(q=>q.m))].map(m=>'<option>'+esc(m)+'</option>').join('');
-$('#fm').onchange=$('#fo').onchange=()=>build(false);
-build(true);pull();
+$('#sv').onclick=()=>{cfg.url=$('#url').value.trim();localStorage.setItem(K+'.cfg',JSON.stringify(cfg));status('Sincronizando...');pull().then(push)};
+home();pull();
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js');
-</script></body></html>
+</script></main></body></html>
